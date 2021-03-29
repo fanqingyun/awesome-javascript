@@ -1,4 +1,4 @@
-# awesome-javascript
+### awesome-javascript
 #### Javascript第4版学习笔记
 
 ​		本书从 JavaScript 的起源开始，逐步讲解到新出现的技术，其中重点介绍 ECMAScript 和 DOM 标准。在 此基础上，接下来的各章揭示了 JavaScript 的基本概念，包括类、期约、迭代器、代理，等等。另外，书 中深入探讨了客户端检测、事件、动画、表单、错误处理及 JSON。本书同时也介绍了近几年来涌现的重 要新规范，包括 Fetch API、模块、工作者线程、服务线程以及大量新 API
