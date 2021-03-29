@@ -1,6 +1,6 @@
 ### 历史回顾
 
-![image-20210329151518553](C:\Users\云海\AppData\Roaming\Typora\typora-user-images\image-20210329151518553.png)
+![image-20210329151518553](../images/image-20210329151518553.png)
 
 ### Javascript与ECMAScript的关系
 ### Javascript是什么
