@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本引用类型</title>
+</head>
+
+<body>
+    <div>
+        <h3>Date</h3>
+        <div id="date"></div>
+        <div id="timestamps"></div>
+        <!-- <button onclick="getDate">创建日期</button> -->
+        <!-- <button onclick="parseDate()">当前毫秒值</button> -->
+    </div>
+</body>
+<script>
+    const date = document.querySelector('#date')
+    const timestamps = document.querySelector('#timestamps')
+
+    function getDate() {
+        date.innerHTML = new Date()
+        timestamps.innerHTML = Date.parse(new Date())
+    }
+
+    // function parseDate() {
+    //     timestamps.innerHTML = Date.parse(new Date())
+    // }
+    const t = window.setInterval(getDate, 1000)
+    window.addEventListener('unload', () => {
+        window.clearInterval(t)
+    })
+</script>
+
+</html>
