@@ -1,6 +1,9 @@
 ### script标签
+
 一般来说，浏览器解析页面是从上往下一行一行解析的，当遇到script标签（没有设置defer和async）时，会先执行js代码，暂停html的解析,执行完js代码后才会继续继续页面
+
 #### 属性
+
 - type 表示代码块中脚本语言的内容类型（也称 MIME 类型）。按照惯 例，这个值始终都是"text/javascript"，尽管"text/javascript"和"text/ecmascript" 都已经废弃了。JavaScript 文件的 MIME 类型通常是"application/x-javascript"，不过给 type 属性这个值有可能导致脚本被忽略。在非 IE 的浏览器中有效的其他值还有 "application/javascript"和"application/ecmascript"。`如果这个值是 module，则代码会被当成ES6模块，而且只有这时候代码中才能出现 import 和 export 关键字`。
 - async 不阻塞html解析，一旦下载完成则立即执行，在load之前执行
 - defer 不阻塞html解析，延迟到页面完全解析后执行，在DOMContentLoaded和load之前执行
@@ -24,4 +27,5 @@
 也可以说，标准模式是除怪诞模式的其他文档模式
 
 ### noscript 标签
+
 适用于浏览器不支持或禁用JavaScript
