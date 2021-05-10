@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>requestAnimationFrame</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div style="height: 1200px" id="box">
+        <div id="child" style="width: 50px; height: 50px;background-color: blueviolet;">测试</div>
+    </div>
+    <script>
+        function testScroll() {
+            console.count()
+        }
+        let isTrue = true
+
+        function test() {
+            // for (let i = 0; i < 10000000; i++) {
+            //     if (i >= 9999990) {
+            //         console.log(i)
+            //     }
+            // }
+            document.querySelector('#child').style.height = `${document.querySelector('#child').clientHeight + 10}px`
+            console.log(isTrue)
+        }
+        window.addEventListener('scroll', () => {
+            if (isTrue) {
+                isTrue = false
+                requestAnimationFrame(test)
+                setTimeout(() => {
+                    isTrue = true
+                }, 500)
+            }
+            testScroll()
+        })
+    </script>
+</body>
+<html>
