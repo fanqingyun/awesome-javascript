@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>接收的文档</title>
+</head>
+
+<body>
+    <div>我是接收文档，接收的信息是<span id="content"></span></div>
+    <script>
+        window.addEventListener("message", (event) => {
+            console.log('src', event)
+                // 确保来自预期发送者
+                // if (event.origin == "http://www.wrox.com") {
+                //     // 对数据进行一些处理
+                //     processMessage(event.data);
+                //     // 可选：向来源窗口发送一条消息
+                //     event.source.postMessage("Received!", "http://p2p.wrox.com");
+                // }
+        });
+    </script>
+</body>
+
+</html>

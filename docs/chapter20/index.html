@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>postmessage</title>
+</head>
+
+<body>
+    <div>端口9002的index</div>
+    <iframe src="http://172.25.160.1:9001/src.html" frameborder="0" id="myframe"></iframe>
+    <!-- <iframe src="../chapter19/src.html" frameborder="0" id="myframe"></iframe> -->
+    <script>
+        let iframeWindow = document.getElementById("myframe").contentWindow;
+        window.setTimeout(() => {
+                iframeWindow.postMessage("A secret", "http://172.25.160.1:9001");
+            }, 1000)
+            // window.addEventListener("message", (event) => {
+            //     console.log('index', event)
+            //         // console.log(event.source === iframeWindow)
+            //         // console.log(event.target === window)
+            //         // console.log(event.source === window)
+            //         // 确保来自预期发送者
+            //         // if (event.origin == "http://www.wrox.com") {
+            //         //     // 对数据进行一些处理
+            //         //     processMessage(event.data);
+            //         //     // 可选：向来源窗口发送一条消息
+            //         //     event.source.postMessage("Received!", "http://p2p.wrox.com");
+            //         // }
+            // });
+    </script>
+</body>
+
+</html>
