@@ -6,20 +6,7 @@
 </head>
 
 <body>
-    <div>端口9001的src aa</div>
-    <div id="msg"></div>
-
+    <h3>一个标题</h3>
 </body>
-<script>
-    // console.log('ewewewe')
-    // window.postMessage('i am src', 'http://172.25.160.1:9002')
-    window.onload = function() {
-        window.addEventListener('message', function(event) {
-            if (event.origin !== 'http://172.25.160.1:9002') return
-            console.log('message received:  ' + event.data, event);
-            event.source.postMessage('holla back youngin!', event.origin);
-        }, false);
-    }
-</script>
 
 </html>

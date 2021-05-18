@@ -10,26 +10,21 @@
 
 <body>
     <div>端口9002的index</div>
-    <iframe src="http://172.25.160.1:9001/src.html" frameborder="0" id="myframe"></iframe>
+    <input type="file" id="file-list" multiple>
+    <iframe src="http://192.1.1.14:9001/src.html" frameborder="0" id="myframe"></iframe>
     <!-- <iframe src="../chapter19/src.html" frameborder="0" id="myframe"></iframe> -->
     <script>
         let iframeWindow = document.getElementById("myframe").contentWindow;
-        window.setTimeout(() => {
-                iframeWindow.postMessage("A secret", "http://172.25.160.1:9001");
-            }, 1000)
-            // window.addEventListener("message", (event) => {
-            //     console.log('index', event)
-            //         // console.log(event.source === iframeWindow)
-            //         // console.log(event.target === window)
-            //         // console.log(event.source === window)
-            //         // 确保来自预期发送者
-            //         // if (event.origin == "http://www.wrox.com") {
-            //         //     // 对数据进行一些处理
-            //         //     processMessage(event.data);
-            //         //     // 可选：向来源窗口发送一条消息
-            //         //     event.source.postMessage("Received!", "http://p2p.wrox.com");
-            //         // }
-            // });
+        // window.setTimeout(() => {
+        //     iframeWindow.postMessage("A secret", "http://192.1.1.14:9001");
+        // }, 1000)
+        let fileDom = document.querySelector('#file-list')
+        fileDom.addEventListener('change', function(e) {
+            iframeWindow.postMessage(this.files, "http://192.1.1.14:9001");
+        })
+        window.addEventListener("message", (event) => {
+            console.log(event.data)
+        });
     </script>
 </body>
 

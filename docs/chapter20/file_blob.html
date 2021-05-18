@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File和Blob API</title>
+</head>
+
+<body>
+    <iframe src="" frameborder="0" id="frame"></iframe>
+    <input type="file" id="files-list" multiple>
+    <button onclick="uploadFile()">上传文件</button>
+    <div id="output"></div>
+    <div id="progress"></div>
+    <div id=`${blobUrl}`></div>
+</body>
+<script>
+    // FileReader
+    let filesList = document.getElementById("files-list");
+    let file
+    filesList.addEventListener("change", (event) => {
+        let info = "",
+            output = document.getElementById("output"),
+            progress = document.getElementById("progress"),
+            files = event.target.files,
+            type = "default",
+            reader = new FileReader();
+        file = files[0]
+        if (/image/.test(files[0].type)) {
+            reader.readAsDataURL(files[0]);
+            type = "image";
+        } else {
+            reader.readAsText(files[0]);
+            type = "text";
+        }
+        reader.onerror = function() {
+            output.innerHTML = "Could not read file, error code is " +
+                reader.error.code;
+        };
+
+        reader.onprogress = function(event) {
+            if (event.lengthComputable) {
+                progress.innerHTML = `${event.loaded}/${event.total}`;
+            }
+        };
+        reader.onload = function() {
+            let html = "";
+            switch (type) {
+                case "image":
+                    html = `<img src="${reader.result}">`;
+                    break;
+                case "text":
+                    html = reader.result;
+                    break;
+            }
+            output.innerHTML = html;
+        };
+    });
+    var data = "<div style='color:red;'>This is a blob</div>";
+    var blob = new Blob([data], {
+        type: 'text/html'
+    }); // 'application/json'
+    var blobUrl = URL.createObjectURL(blob);
+    document.getElementById('frame').src = blobUrl
+
+    function uploadFile() {
+        console.log('wqw')
+        var chunkSize = 1024 * 1024; //每片1M大小
+        var totalSize = file.size;
+        var chunkQuantity = Math.ceil(totalSize / chunkSize); //分片总数
+        var offset = 0; //偏移量
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", 'http://192.1.1.14:9001');
+            // xhr.overrideMineType("application/octet-stream");
+
+            xhr.onreadstatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    ++offset;
+                    if (offset === chunkQuantity) {
+                        alert("上传完成");
+                    } else if (offset === chunckQuantity - 1) {
+                        blob = file.slice(offset * chunkSize, totalSize);
+                        reader.readAsBinaryString(blob);
+                    } else {
+                        blob = file.slice(offset * chunkSize, (offset + 1) * chunckSize);
+                        reader.readAsBinaryString(blob);
+                    }
+                } else {
+                    alert("上传出错")
+                }
+            }
+
+            if (xhr.sendAsBinary) {
+                xhr.sendAsBinary(e.target.result);
+            } else {
+                xhr.send(e.target.result);
+            }
+        }
+        var blob = file.slice(0, chunkSize);
+        reader.readAsBinaryString(blob);
+    }
+</script>
+
+</html>
